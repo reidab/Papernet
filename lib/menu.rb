@@ -15,9 +15,11 @@ module HotCocoa
         apple.item :quit, :title => "Quit #{NSApp.name}", :key => "q"
       end
       main.submenu :file do |file|
-        file.item :new, :key => "n"
+        file.item :new, :label => 'New Window', :key => "n"
         file.item :open, :key => "o"
         file.item :open_location, :key => "l"
+        file.separator
+        file.item :close, :label => "Close Window", :key => 'w'
       end
       main.submenu :edit do |edit|
         edit.item :undo, :key => "z", :modifiers => [:command], :action => "undo:"
@@ -37,6 +39,9 @@ module HotCocoa
         view.item :reload, :title => "Reload Page", :key => 'r'
         view.item :back, :key => '['
         view.item :forward, :key => ']'
+        view.separator
+        view.item :zoom_in_print_view, :key => '+'
+        view.item :zoom_out_print_view, :key => '-'
       end
       main.submenu :window do |win|
         win.item :minimize, :key => "m"
