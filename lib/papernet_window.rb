@@ -181,8 +181,7 @@ class PapernetWindow
   end
 
   def update_print_view(options = {})
-    # FIXME use a real tmp path
-    tmp_print_path = "/Users/reidab/Desktop/web2.pdf"
+    tmp_print_path = Tempfile.new(["papernet", ".pdf"]).path
     options = {'paginate' => true}.merge(options)
 
     print_info = NSPrintInfo.sharedPrintInfo
@@ -208,6 +207,8 @@ class PapernetWindow
       operation.runOperation
       pdf_pane.document = PDFDocument.alloc.initWithData(pdf_data)
     end
+
+    File.delete(tmp_print_path)
   end
 
   # WebView Delegate

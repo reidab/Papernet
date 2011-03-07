@@ -4,6 +4,7 @@ require 'uri'
 
 require 'lib/pdf_view'
 require 'lib/papernet_window'
+require 'tempfile'
 framework 'webkit'
 framework 'quartz'
 
