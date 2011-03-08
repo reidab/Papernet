@@ -61,6 +61,11 @@ class Application
     main_papernet_window.focus_location_bar
   end
   
+  def on_open_location(menu)
+    create_window unless main_papernet_window
+    main_papernet_window.focus_location_bar
+  end
+  
   # file/new 
   def on_new(menu)
     create_window
@@ -80,6 +85,17 @@ class Application
     win = main_papernet_window
     win.show_pdf_view if win
   end
+  
+  def on_save_as_pdf(menu=nil)
+    win = main_papernet_window
+    if win
+      dialog = NSSavePanel.new
+      dialog.allowedFileTypes = ["pdf"]
+      if dialog.runModal == NSOKButton
+        win.pdf_pane.document.writeToFile(dialog.filename)
+      end
+    end
+  end    
   
   def on_reset_split_view(menu=nil)
     win = main_papernet_window
